@@ -1,7 +1,6 @@
 package com.lxt.springbootdubbonacos.site.rabbitmq.consumer;
 
 
-import com.lxt.nacosdubboapi.dubboprovider.dto.UserDto;
 import com.lxt.springbootdubbonacos.site.user.pojo.UserPojo;
 import com.lxt.springbootdubbonacos.site.user.servcie.UserServicelxt;
 import lombok.extern.slf4j.Slf4j;

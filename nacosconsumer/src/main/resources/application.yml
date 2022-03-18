@@ -1,0 +1,40 @@
+# 配置端口
+server:
+  port: 8087
+dubbo:
+  # 配置服务信息
+  application:
+    name: dubbo-consumer
+    # 禁用QOS同一台机器可能会有端口冲突现象
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  # 配置注册中心
+  registry:
+    address: nacos://127.0.0.1:8848
+  # 设置超时时间
+  consumer:
+    timeout: 4000
+spring:
+  main:
+    # 解决Bean重复定义问题
+    allow-bean-definition-overriding: true
+
+  #mysql配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/lxt?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    name: lxt
+
+#mybatisplus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    classpath*: mapper/**/*.xml
+  global-config:
+    logic-delete-value: 1
+    logic-not-delete-value: 0

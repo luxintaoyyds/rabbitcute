@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxt.springbootdubbonacos.site.excel.mapper.PersonMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lxt.springbootdubbonacos.site.excel.pojo.PersonExcel">
+        <id column="id" property="id" />
+        <result column="person_name" property="personName" />
+        <result column="person_gender" property="personGender" />
+        <result column="person_age" property="personAge" />
+        <result column="job" property="job" />
+        <result column="english_level" property="englishLevel" />
+    </resultMap>
+
+
+    <select id="getList" resultMap="BaseResultMap">
+        select * from person
+    </select>
+
+
+
+</mapper>

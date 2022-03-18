@@ -1,0 +1,118 @@
+#端口配置
+server:
+  port: 8088
+
+#dubbo配置
+dubbo:
+  application:
+    name: dubbo-provider
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  #配置注册中心
+  registry:
+    address: nacos://127.0.0.1:8848
+  # 设置协议-协议由提供方指定消费方被动接受
+  protocol:
+    name: dubbo
+    port: 20880
+
+
+#mybatisplus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    #打印输出日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    classpath*: mapper/**/*.xml
+  global-config:
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+
+
+
+spring:
+  application:
+    name: lxtApplication
+
+  main:
+    # 解决Bean重复定义问题
+    allow-bean-definition-overriding: true
+
+  #mysql配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/lxt?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    name: lxt
+
+  #redis配置
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 100
+        max-wait: 30000
+        max-idle: 20
+        min-idle: 0
+    timeout: 300
+
+  #rabbitmq配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    password: guest
+    username: guest
+
+
+  #jackson格式配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-date-keys-as-timestamps: false
+
+
+  #kafka
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    #如果该值大于零时，表示启用重试失败的发送次数
+    producer.retries: 0
+    #每当多个记录被发送到同一分区时，生产者将尝试将记录一起批量处理为更少的请求，默认值为16384(单位字节)
+    producer:
+      batch-size: 16384
+      #生产者可用于缓冲等待发送到服务器的记录的内存总字节数，默认值为3355443
+      buffer-memory: 33554432
+      #key的Serializer类，实现类实现了接口
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #value的Serializer类，实现类实现了接口
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    #用于标识此使用者所属的使用者组的唯一字符串
+    consumer:
+      group-id: etl
+      #当Kafka中没有初始偏移量或者服务器上不再存在当前偏移量时该怎么办，默认值为latest，表示自动将偏移重置为最新的偏移量,可选的值为latest, earliest, none
+      auto-offset-reset: earliest
+      #消费者的偏移量将在后台定期提交，默认值为true
+      enable-auto-commit: true
+      #如果'enable-auto-commit'为true，则消费者偏移自动提交给Kafka的频率（以毫秒为单位），默认值为5000。
+      auto-commit-interval: 100
+      #密钥的反序列化器类，实现类实现了接口org.apache.kafka.common.serialization.Deserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #值的反序列化器类，实现类实现了接口org.apache.kafka.common.serialization.Deserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
+#访问url
+lxt:
+  url: http//localhost:8080/getLxtUrl
+
+
+
+
+
+
+

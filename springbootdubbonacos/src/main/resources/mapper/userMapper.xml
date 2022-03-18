@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxt.springbootdubbonacos.site.user.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lxt.springbootdubbonacos.site.user.pojo.UserPojo">
+        <id column="user_id" property="userId" />
+        <result column="name" property="name" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="nation" property="nation" />
+        <result column="password" property="password" />
+        <result column="student_id" property="studentId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, name, gender, age, nation, password, student_id
+    </sql>
+
+    <select id="getUserInfo" parameterType="string" resultMap="BaseResultMap">
+        select * from user where name=#{name}
+    </select>
+
+    <!--批量新增数据-->
+    <insert id="batchInsert" >
+         insert into user
+             (name,gender, age, nation, password, student_id)  values
+         <foreach collection="userPojoList" item="user" separator=",">
+             (
+                 #{user.name},
+                 #{user.gender},
+                 #{user.age},
+                 #{user.nation},
+                 #{user.password},
+                 #{user.studentId}
+             )
+         </foreach>
+    </insert>
+
+    <!--单个新增-->
+    <insert id="insertUser" parameterType="com.lxt.springbootdubbonacos.site.user.pojo.UserPojo" >
+        insert into user
+          (name,
+           gender,
+           age,
+           nation,
+           password,
+           student_id
+           )
+        values
+          (
+           #{name},
+           #{gender},
+           #{age},
+           #{nation},
+           #{password},
+           #{studentId}
+          )
+    </insert>
+
+    <update id="updateUser" >
+        update user set name=#{name} where user_id=#{userId}
+    </update>
+
+
+
+</mapper>
